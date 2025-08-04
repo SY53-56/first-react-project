@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+.color p.active{
+    color: red;
+}
