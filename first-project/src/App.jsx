@@ -19,13 +19,12 @@ import Comment from "./components/Cemment"
 
 function App() {
   const [show, setShow] = useState(null); // initially nothing is shown
-  const [form,setForm] = useState(false)
+
   const [change ,setChange]= useState(false)
 
-  const [box , setBox] = useState(false)
-  const [color ,setColor] = useState(false)
+ 
   const [count,setCount ]  = useState(0)
-  const [name , setName]  =useState('')
+
 
    const DUMMY_TODOS = [
     'Learn React',
@@ -52,7 +51,7 @@ function handleCount(){
       <Header />
       
     
-      <div className="flex gap-6 flex-wrap ">
+      <div className="flex gap-6 flex-wrap  ">
         <Card />
         <Game />
       </div>
