@@ -23,23 +23,7 @@ function App() {
   const [change ,setChange]= useState(false)
 
  
-  const [count,setCount ]  = useState(0)
 
-
-   const DUMMY_TODOS = [
-    'Learn React',
-    'Practice React',
-    'Profit!'
-];
-function handleCount(){
-  setCount(count+1)
-}
-
-
-
-  function handleData(index) {
-    setShow(CONCEPTS[index]);
-  }
 
   return (
     <>

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from './Button';
-
+import theme from "../context/theme"
 export default function App() {
   const oldData = JSON.parse(localStorage.getItem("data")) || [];
   const [inputData, setInputData] = useState('');
   const [tasks, setTasks] = useState(oldData);
+  const {themeData} = useContext(theme)
 
   function handleChange(e) {
     setInputData(e.target.value);
@@ -20,6 +21,7 @@ export default function App() {
     localStorage.setItem("data", JSON.stringify(updatedTasks));
     setInputData('');
   }
+  
 
   function handleComplete(index) {
     const updatedTasks = [...tasks];
@@ -35,8 +37,15 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-6 rounded-xl shadow-md">
+    <div className="min-h-screen flex items-center justify-center " style={{
+        padding: "10px",
+        background: themeData === "light" ? "#ccc" : "#444",
+      }}>
+     
+      <div className="w-[500px] max-w-md border bg-white p-6 rounded-xl shadow-md" style={{
+        padding: "10px",
+        background: themeData === "light" ? "#ccc" : "#444",
+      }}>
         <h1 className="text-3xl font-bold text-center text-blue-600 mb-4">📝 Todo App</h1>
 
         <form onSubmit={handleForm} className="flex gap-2 mb-4">
@@ -44,7 +53,7 @@ export default function App() {
             value={inputData}
             onChange={handleChange}
             placeholder="Add a new task"
-            className="flex-grow border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="flex-grow border  border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <button
             type="submit"
@@ -62,7 +71,10 @@ export default function App() {
                 task.isCompleted ? 'bg-green-50 line-through text-gray-400' : 'bg-white'
               }`}
             >
-              <span className="flex-grow">{task.text}</span>
+              <span className="flex-grow " style={{
+        padding: "10px",
+        color: themeData === "light" ? "black" : "#444",
+      }}>{task.text}</span>
               <Button
                 onComplete={() => handleComplete(i)}
                 onDelete={() => handleDelete(i)}

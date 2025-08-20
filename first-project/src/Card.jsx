@@ -1,17 +1,34 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useState, useRef } from 'react';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function Card() {
   const [count, setCount] = useState(0);
   const [bgColor, setBgColor] = useState("red");
-  const [random, setRandom] = useState(0)
+  const [random, setRandom] = useState(0);
 
-function randomNumberhandle(){
-    let randomNum = Math.floor(Math.random()*6)+1
-   setRandom(randomNum)
-}
+  const boxRef = useRef();
 
+  useGSAP(() => {
+    gsap.fromTo(
+      boxRef.current,
+      { scale: 0.8, x: 0 },
+      { 
+        scale: 1,
+        duration: 2,
+        delay: 1,
+        x: 400,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.in"
+      }
+    );
+  });
 
+  function randomNumberHandle() {
+    let randomNum = Math.floor(Math.random() * 6) + 1;
+    setRandom(randomNum);
+  }
 
   function colorMaker() {
     const r = Math.floor(Math.random() * 255);
@@ -21,28 +38,30 @@ function randomNumberhandle(){
   }
 
   function randomColor() {
-    const newColor = colorMaker(); // ✅ call the function
-    setBgColor(newColor);
+    setBgColor(colorMaker());
   }
-  
-function countHandle(){
-    if(count >=20){
-        alert("this is a count limit")
-        return
+
+  function countHandle() {
+    if (count >= 20) {
+      alert("This is the count limit");
+      return;
     }
-    setCount(count+1)
-}
-function decreaseHandle(){
-    if(count<0){
-        alert("this is a count limit")
-        return
+    setCount(count + 1);
+  }
+
+  function decreaseHandle() {
+    if (count <= 0) {
+      alert("Count cannot go below 0");
+      return;
     }
-    setCount(count-1)
-}
+    setCount(count - 1);
+  }
+
   return (
-    <div className='w-full flex px-4  gap-2 items-center'>
+    <div className='w-full flex px-4 gap-2 items-center'>
       <div
-        className='w-[500px] h-[200px] py-3 rounded-lg shadow-md'
+        ref={boxRef}
+        className='box w-[500px] h-[200px] py-3 rounded-lg shadow-md'
         style={{ backgroundColor: bgColor }}
       >
         <h1 className='text-center text-5xl text-white'>sahul</h1>
@@ -51,44 +70,38 @@ function decreaseHandle(){
           <h2 className='text-white text-xl'>Count: {count}</h2>
 
           <div className='flex gap-3'>
-            <button
-              onClick={countHandle}
-              className='border px-4 py-2 rounded-xl bg-green-500 text-white'
-            >
+            <button onClick={countHandle}
+              className='border px-4 py-2 rounded-xl bg-green-500 text-white'>
               Increase
             </button>
 
-            <button
-              onClick={decreaseHandle}
-              className='border px-4 py-2 rounded-xl bg-red-500 text-white'
-            >
+            <button onClick={decreaseHandle}
+              className='border px-4 py-2 rounded-xl bg-red-500 text-white'>
               Decrease
             </button>
 
-            <button
-              onClick={() => setCount(0)}
-              className='border px-4 py-2 rounded-xl bg-gray-500 text-white'
-            >
+            <button onClick={() => setCount(0)}
+              className='border px-4 py-2 rounded-xl bg-gray-500 text-white'>
               Reset
             </button>
 
-            <button
-              onClick={randomColor}
-              className='border px-4 py-2 rounded-xl bg-blue-500 text-white'
-            >
+            <button onClick={randomColor}
+              className='border px-4 py-2 rounded-xl bg-blue-500 text-white'>
               Change Color
             </button>
           </div>
         </div>
       </div>
-      <div   className={`w-[500px] h-[200px] py-3 rounded-lg shadow-md ${random>3?'bg-green-600':'bg-blue-600'}`}>
-          <h1 className='text-center text-4xl text-white font-bold'>Random number genretor</h1>
-          <h1 className='text-center text-4xl text-white font-bold mt-3'>random number:{random}</h1>
-          <button  className='border px-4 py-2 rounded-xl bg-gray-500 text-white mt-4 ml-5 cursor-pointer' onClick={randomNumberhandle}>Random</button>
+
+      <div className={`w-[500px] h-[200px] py-3 rounded-lg shadow-md ${random > 3 ? 'bg-green-600' : 'bg-blue-600'}`}>
+        <h1 className='text-center text-4xl text-white font-bold'>Random number generator</h1>
+        <h1 className='text-center text-4xl text-white font-bold mt-3'>random number: {random}</h1>
+        <button
+          onClick={randomNumberHandle}
+          className='border px-4 py-2 rounded-xl bg-gray-500 text-white mt-4 ml-5 cursor-pointer'>
+          Random
+        </button>
       </div>
- 
-
     </div>
-
   );
 }

@@ -94,7 +94,7 @@ export default function Card() {
 
         {tableData.length > 0 && (
           <table className="w-full mt-6 border-collapse text-sm shadow rounded-lg overflow-hidden">
-            <thead className="bg-emerald-600 text-white">
+            <thead className="bg-emerald-600 text-white ">
               <tr>
                 <th className="py-3 px-4 text-left">Year</th>
                 <th className="py-3 px-4 text-left">Investment Value</th>
