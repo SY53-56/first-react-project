@@ -1,9 +1,12 @@
 import React from 'react'
+import { useContext } from 'react';
 import {Link, NavLink} from 'react-router-dom'
+import ToggleContext from '../../context/ToggleContext';
 
 export default function Header() {
+    const {theme ,handleTheme} =  useContext(ToggleContext)
     return (
-        <header className="shadow sticky z-50 top-0">
+        <header className="shadow sticky z-50 top-0" style={{backgroundColor:theme, color: theme ==="white"?"black":"white"}}>
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <Link to="/" className="flex items-center">
@@ -74,7 +77,7 @@ export default function Header() {
                             </li>
                             
                         </ul>
-                        <button>toggle</button>
+                        <button className='block py-2 ml-8 pr-4 pl-3 duration-200 bg-amber-700   "text-gray-700" border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0'  onClick={handleTheme}>toggle</button>
                     </div>
                 </div>
             </nav>

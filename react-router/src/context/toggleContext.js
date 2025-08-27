@@ -1,6 +1,6 @@
 import React,{createContext} from "react";
 
-let toggleContext = createContext()
+let ToggleContext = createContext()
 
 
-export default toggleContext
+export default ToggleContext

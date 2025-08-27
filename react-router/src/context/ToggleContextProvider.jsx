@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
-import toggleContext from './ToggleContext'
-import { Children } from 'react'
+import React, { useState } from 'react';
+import ToggleContext from './ToggleContext';
 
-export default function ToggleContextProvider() {
-    let [theme ,setTheme] = useState("white")
-    function handleTheme(){
-        setTheme(prev=>prev==="white"?"black":"white")
-    }
+export default function ToggleContextProvider({ children }) {  // ✅ destructure children
+  const [theme, setTheme] = useState("white");
+
+  function handleTheme() {
+    setTheme(prev => prev === "white" ? "black" : "white");
+  }
+
   return (
-    <toggleContext.Provider value={{theme ,handleTheme}}>
-      {Children}
-    </toggleContext.Provider>
-  )
+    <ToggleContext.Provider value={{ theme, handleTheme }}>
+      {children}   {/* ✅ render actual content passed into the provider */}
+    </ToggleContext.Provider>
+  );
 }
