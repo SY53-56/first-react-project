@@ -10,9 +10,12 @@ function App() {
 
   return (
     <>
-    <h1 className='text-center'>learn redux-toolkit</h1>
-    <Add/>
+
+    <div className='w-full flex flex-col justify-center h-[100vh] items-center bg-purple-600'>
+          <h1 className='text-center text-8xl font-bold font-sans'>learn redux-toolkit</h1>
+      <Add/>
     <Todo/>
+    </div>
     </>
   )
 }
